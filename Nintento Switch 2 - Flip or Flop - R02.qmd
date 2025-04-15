@@ -47,8 +47,12 @@ Plan for Data Visualization: Line charts, bar charts (market share).
 
 # Data Wrangling Plan
 
-Data Wrangling - From Records to Data  
-> Process of loading data into R (e.g., read_csv()). Initial data exploration (glimpse(), head()).
+**Data Wrangling: From Records to Data**
+
+>Process of loading data into R\
+>e.g., read_csv()\
+>Initial data exploration\
+>glimpse(), head()\
 
 ## Loading "Video Games Sales 2019"
 
