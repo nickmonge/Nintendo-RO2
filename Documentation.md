@@ -1,0 +1,25 @@
+Explanation of features:
+
+- The YAML header defines metadata for a reveal.js presentation.
+- It sets the title, subtitle, author, institute, and formatted date.
+- It specifies slide settings like theme, dimensions, transitions, and table of contents.
+- The first section outlines research objectives and details the measures and plans.
+- The code chunks load the “Video Games Sales 2019” dataset:
+    - Python downloads the dataset using kagglehub.
+    - The path to dataset files is printed.
+    - R retrieves the Python variable.
+    - R lists CSV files in the directory.
+    - R selects and reads a CSV file, then explores the data.
+- The next section loads the “Nintendo Games” dataset:
+    - Python downloads the dataset.
+    - The path is printed.
+    - R retrieves the Python variable.
+    - R lists and reads a CSV file.
+    - R shows a data preview.
+- The final dataset, “Video Games Sales Dataset 2022 Updated Extra Features,” follows the same steps:
+    - Python downloads the dataset.
+    - The path is printed.
+    - R retrieves the Python variable.
+    - R lists and reads a CSV file.
+    - R previews the data.
+- The presentation ends with a thank you slide.
