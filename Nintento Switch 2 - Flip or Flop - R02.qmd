@@ -1,0 +1,157 @@
+---
+title: "Nintendo Switch 2 - Flip or Flop"
+subtitle: "RO2 - Console Platform Performance"
+author: "Nick"
+institute: "GBA 5910, Cal Poly Pomona"
+date: '`r format(Sys.time(), "2025,April,7")`'
+format: 
+  revealjs:
+    theme: serif
+    width: 1600
+    height: 900
+    footer: Nintendo Switch 2 - Flip or Flop
+    transition: fade
+    transition-speed: fast
+    incremental: false
+    toc: true
+    toc-depth: 2
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    code-line-numbers: true
+editor: visual
+execute: 
+  echo: true
+  freeze: auto
+editor_options: 
+  chunk_output_type: console
+---
+
+# RO2: Platform Performance
+
+This is the Research Objective that I am responsible for.
+
+Measures:
+
+- Variable 1 (DV): Sales  
+- Variable 2 (IV): Platform  
+- Variable 3 (IV): Year  
+
+Plan for Data Wrangling: Standardizing platform names, aggregating sales.  
+Plan for Data Visualization: Line charts, bar charts (market share).
+
+# Data Wrangling Plan
+
+Data Wrangling - From Records to Data  
+> Process of loading data into R (e.g., read_csv()). Initial data exploration (glimpse(), head()).
+
+## Loading "Video Games Sales 2019"
+
+```{python}
+# Ensure this code chunk delineates {python} not {r}
+# Uncomment the following line if you haven't installed kagglehub
+#!pip install kagglehub
+
+import kagglehub
+
+# Download the latest version of the dataset and assign it to a variable.
+videogamesales_path = kagglehub.dataset_download("ashaheedq/video-games-sales-2019")
+print("Path to dataset files:", videogamesales_path)
+```
+
+```{r}
+library(reticulate)
+library(tidyverse)
+
+# Retrieve the Python variable.
+videogamesales2019_path <- py$videogamesales_path
+
+# List CSV files in the directory.
+videogamesales2019_csv_files <- list.files(videogamesales2019_path, pattern = "\\.csv$", full.names = TRUE)
+print(videogamesales2019_csv_files)
+
+# Choose an index: if at least 2 files exist, use the 2nd one; otherwise, use the 1st.
+if (length(videogamesales2019_csv_files) > 0) {
+  idx <- if(length(videogamesales2019_csv_files) >= 2) 2 else 1
+  videogamesales2019 <- read_csv(videogamesales2019_csv_files[idx])
+  
+  # Show initial exploration.
+  head(videogamesales2019)
+  glimpse(videogamesales2019)
+} else {
+  message("No CSV files found in the directory.")
+}
+```
+
+## Loading "Nintendo Games"
+
+```{python}
+import kagglehub
+
+# Download the latest version of the Nintendo Games dataset and assign it to a variable.
+nintendogames_path = kagglehub.dataset_download("joebeachcapital/nintendo-games")
+print("Path to dataset files:", nintendogames_path)
+```
+
+```{r}
+library(reticulate)
+library(tidyverse)
+
+# Retrieve the Python variable.
+nintendogames_path <- py$nintendogames_path
+
+# List CSV files in the directory.
+nintendogames_csv_files <- list.files(nintendogames_path, pattern = "\\.csv$", full.names = TRUE)
+print(nintendogames_csv_files)
+
+# Read the dataset if a CSV file is found.
+if (length(nintendogames_csv_files) > 0) {
+  nintendogames <- read_csv(nintendogames_csv_files[1])
+  
+  # Data exploration.
+  head(nintendogames)
+  glimpse(nintendogames)
+} else {
+  message("No CSV files found in the directory.")
+}
+```
+
+## Loading "Video Games Sales Dataset 2022 Updated Extra Features"
+
+```{python}
+import kagglehub
+
+# Download the latest version of the dataset and assign it to a variable.
+vidgames2022_path = kagglehub.dataset_download("ibriiee/video-games-sales-dataset-2022-updated-extra-feat")
+print("Path to dataset files:", vidgames2022_path)
+```
+
+```{r}
+library(reticulate)
+library(tidyverse)
+
+# Retrieve the Python variable.
+vidgames2022_path <- py$vidgames2022_path
+
+# List CSV files in the directory.
+vidgames2022_csv_files <- list.files(vidgames2022_path, pattern = "\\.csv$", full.names = TRUE)
+print(vidgames2022_csv_files)
+
+# Read the dataset if a CSV file is found.
+if (length(vidgames2022_csv_files) > 0) {
+  vidgames2022 <- read_csv(vidgames2022_csv_files[1])
+  
+  # Data exploration.
+  head(vidgames2022)
+  glimpse(vidgames2022)
+} else {
+  message("No CSV files found in the directory.")
+}
+```
+
+# Thank you!

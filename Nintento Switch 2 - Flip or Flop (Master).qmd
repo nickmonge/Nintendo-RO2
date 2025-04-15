@@ -1,0 +1,237 @@
+---
+title: "Nintendo Switch 2 - Flip or Flop"
+subtitle: "Leveraging Data Analytics for Strategic Insights on Genre, Platform, and Market Trends"
+author: "Group 1"
+institute: "GBA 5910, Cal Poly Pomona"
+date: '`r format(Sys.time(), "2025,April,7")`'
+format: 
+  revealjs:
+    theme: serif
+    width: 1600
+    height: 900
+    footer: Nintendo Switch 2 - Flip or Flop
+    transition: fade
+    transition-speed: fast
+    incremental: false
+    toc: true
+    toc-depth: 1
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+editor: visual
+execute: 
+  echo: true
+  freeze: auto
+editor_options: 
+  chunk_output_type: console
+---
+
+# 1. Problem Definition
+
+-   Lack of sufficient market research by game and console developers for new console success.
+
+-   Focus on Nintendo and the strategic importance of the Switch 2.
+
+-   Potential negative impacts of inadequate research (financial, market position), which could lead to a similar negative result as previous consoles.
+
+# 2. Research Objectives
+
+-   RO1: Genre Trends
+-   RO2: Platform Performance
+-   RO3: ESRB Rating Impact
+-   RO4: Console to Game Ratio
+-   RO5: Backward Compatibility
+
+# 3. Why Does It Matter?
+
+-   Our research aims to provide actionable insights for game developers and decision-makers, not just academic analysis.
+
+-   Using data analytics, we will examine genre performance, platform comparisons, and the impact of ESRB ratings on sales.
+
+-   Findings will be directly tied to defined variables and used to inform strategic planning for the upcoming Nintendo Switch 2.
+
+# 4. Population & Sampling/Data Collection
+
+> Define the data population:
+
+-   Historical sales data of video games and consoles across various platforms and time periods, as found in Kaggle datasets. 
+-   Describe the data types available (game titles, genres, platforms, sales, ESRB, dates).
+-   Outline the data acquisition process (downloading).
+
+# 5. Data Wrangling Plan
+
+## Data Wrangling - From Records to Data
+
+> Process of loading data into R (e.g., read_csv()). Initial data exploration (glimpse(), head()).
+
+### Loading "Video Games Sales 2019"
+
+```{python}
+# Ensure this code chunk delineates {python} not {r}
+# Uncomment the following line if you haven't installed kagglehub
+#!pip install kagglehub
+
+import kagglehub
+
+# Download the latest version of the dataset and assign it to a variable.
+directory_path = kagglehub.dataset_download("ashaheedq/video-games-sales-2019")
+print("Path to dataset files:", directory_path)
+```
+
+```{r}
+library(reticulate)
+library(tidyverse)
+
+# Retrieve the Python variable from reticulate.
+videogamesales2019_path <- py$directory_path
+
+# List CSV files in the directory.
+videogamesales2019_csv_files <- list.files(videogamesales2019_path, pattern = "\\.csv$", full.names = TRUE)
+print(videogamesales2019_csv_files)
+
+# If there's at least one CSV file, read and show the first few rows.
+if(length(videogamesales2019_csv_files) > 0) {
+  videogamesales2019 <- read_csv(videogamesales2019_csv_files[2]) # manually changed to item 2 for longer CSV
+  head(videogamesales2019)
+  glimpse(videogamesales2019)
+} else {
+  message("No CSV files found in the directory.")
+}
+```
+
+
+### Loading "Nintendo Games"
+
+```{python}
+import kagglehub
+
+# Download the latest version of the Nintendo Games dataset and assign it to a variable.
+nintendogames_path = kagglehub.dataset_download("joebeachcapital/nintendo-games")
+print("Path to dataset files:", nintendogames_path)
+```
+
+```{r}
+library(reticulate)
+library(tidyverse)
+
+# Retrieve the Python variable from reticulate.
+nintendogames_path <- py$nintendogames_path
+
+# List CSV files in the directory.
+nintendogames_csv_files <- list.files(nintendogames_path, pattern = "\\.csv$", full.names = TRUE)
+print(nintendogames_csv_files)
+
+# If there's at least one CSV file, read and show the first few rows.
+if(length(nintendogames_csv_files) > 0) {
+  nintendogames <- read_csv(nintendogames_csv_files[1])
+  head(nintendogames)
+  glimpse(nintendogames)
+} else {
+  message("No CSV files found in the directory.")
+}
+```
+
+## Data Wrangling - Tidying the Data
+
+> Ensuring data adheres to tidy principles. Strategies for handling missing values and inconsistencies. Potential for merging datasets.
+
+## Data Wrangling - Transforming the Data (General)
+
+> Overview of transformations needed for analysis (calculations, extractions, recoding).
+
+-   Clean data by deleting records with missing information that is relevant
+-   Join tables together using join functions
+-   For example, joining video game sales table to console sales table to examine trends over the years between the two
+
+# 6. RO1: Genre Trends
+
+Measures:
+
+-   Variable 1 (DV): Sales
+
+-   Variable 2 (IV): Genre
+
+-   Variable 3 (IV): Platform
+
+-   Variable 4 (IV): Year
+
+Plan for Data Wrangling: Cleaning genre names, grouping data.
+
+Plan for Data Visualization: Bar charts, line charts.
+
+# 7. RO2: Platform Performance
+
+Measures:
+
+-   Variable 1 (DV): Sales
+
+-   Variable 2 (IV): Platform
+
+-   Variable 3 (IV): Year
+
+Plan for Data Wrangling: Standardizing platform names, aggregating sales.
+
+Plan for Data Visualization: Line charts, bar charts (market share).
+
+# 8. RO3: ESRB Rating Impact
+
+Measures:
+
+-   Variable 1 (DV): Sales
+
+-   Variable 2 (IV): ESRB Rating
+
+-   Variable 3 (IV): Genre
+
+-   Variable 4 (IV): Platform
+
+Plan for Data Wrangling: Ensuring consistent ESRB categories (forcats).
+
+Plan for Data Visualization: Box plots, bar charts.
+
+# 9. R04: Console to Game Ratio
+
+Measures:
+
+-   Variable 1 (DV): Ratio (Game Sales / Console Sales)
+
+-   Variable 2 (IV): Console Sales
+
+-   Variable 3 (IV): Game Sales
+
+-   Variable 4 (IV): Platform
+
+-   Variable 5 (IV): Year
+
+Plan for Data Wrangling: Obtaining console sales (if needed), calculating ratio.
+
+Plan for Data Visualization: Line charts.
+
+# 10. RO5: Backward Compatibility
+
+Measures:
+
+-   Variable 1 (Potential DV): Console Sales
+
+-   Variable 2 (Potential DV): Game Sales
+
+-   Variable 3 (Potential DV): Number of New Releases
+
+-   Variable 4 (Potential IV): Presence/Absence of Backward Compatibility
+
+Plan for Data Wrangling: Identifying consoles with/without BC.
+
+Plan for Data Visualization: Line charts, bar charts (comparisons).
+
+# 11. Conclusion
+
+-   Measuring Nintendo's success with new consoles based on video game sales
+
+-   Data imported from Kaggle
+
+-   Visualizations with correlations between console sales, genres, ESRB ratings, and backward compatibility, our main ROs
